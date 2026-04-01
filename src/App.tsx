@@ -17,6 +17,9 @@ import Payments from "./pages/Payments";
 import Subscription from "./pages/Subscription";
 import Leads from "./pages/Leads";
 import BusinessDetail from "./pages/BusinessDetail";
+import FrontendLeads from "./pages/FrontendLeads";
+import Wholesale from "./pages/Wholesale";
+import ConsumerShopping from "./pages/ConsumerShopping";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -42,6 +45,9 @@ const App = () => (
           <Route path="/subscription" element={<Subscription />} />
           <Route path="/leads" element={<Leads />} />
           <Route path="/business/:id" element={<BusinessDetail />} />
+          <Route path="/frontend-leads" element={<FrontendLeads />} />
+          <Route path="/wholesale" element={<Wholesale />} />
+          <Route path="/consumer-shopping" element={<ConsumerShopping />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -21,6 +21,9 @@ const Home = () => {
           <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
             <a href="#search" className="hover:text-foreground transition-colors">Find Business</a>
             <a href="#features" className="hover:text-foreground transition-colors">Features</a>
+            <button onClick={() => navigate("/wholesale")} className="hover:text-foreground transition-colors">Wholesale</button>
+            <button onClick={() => navigate("/consumer-shopping")} className="hover:text-foreground transition-colors">Shopping</button>
+            <button onClick={() => navigate("/frontend-leads")} className="hover:text-foreground transition-colors">Leads</button>
           </div>
           <div className="flex items-center gap-2">
             <ThemeToggle />
