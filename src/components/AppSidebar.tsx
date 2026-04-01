@@ -11,6 +11,8 @@ import {
   Crown,
   Search,
   Megaphone,
+  UserCheck,
+  ExternalLink,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
@@ -29,7 +31,7 @@ import {
 } from "@/components/ui/sidebar";
 
 const mainNav = [
-  { title: "Dashboard", url: "/", icon: LayoutDashboard },
+  { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
   { title: "Website Builder", url: "/website-builder", icon: Globe },
   { title: "Domain & Hosting", url: "/domains", icon: Server },
   { title: "Company Page", url: "/company", icon: Building2 },
@@ -44,6 +46,7 @@ const businessNav = [
 
 const managementNav = [
   { title: "Customers", url: "/customers", icon: Users },
+  { title: "Leads", url: "/leads", icon: UserCheck },
   { title: "Payments", url: "/payments", icon: CreditCard },
   { title: "Subscription", url: "/subscription", icon: Crown },
 ];
@@ -65,7 +68,7 @@ export function AppSidebar() {
               <SidebarMenuButton asChild>
                 <NavLink
                   to={item.url}
-                  end={item.url === "/"}
+                  end={item.url === "/dashboard"}
                   className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                   activeClassName="bg-sidebar-accent text-sidebar-accent-foreground"
                 >
@@ -99,12 +102,23 @@ export function AppSidebar() {
         {renderGroup("Business", businessNav)}
         {renderGroup("Management", managementNav)}
       </SidebarContent>
-      <SidebarFooter className="p-4">
+      <SidebarFooter className="p-4 space-y-2">
         {!collapsed && (
-          <div className="rounded-lg bg-sidebar-accent p-3">
-            <p className="text-xs font-medium text-sidebar-accent-foreground">Free Plan</p>
-            <p className="mt-1 text-xs text-muted-foreground">Upgrade to Pro</p>
-          </div>
+          <>
+            <a
+              href="/"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-2 rounded-lg bg-secondary/50 p-3 text-sm text-foreground hover:bg-secondary transition-colors"
+            >
+              <ExternalLink className="h-4 w-4 text-primary" />
+              <span>View Frontend</span>
+            </a>
+            <div className="rounded-lg bg-sidebar-accent p-3">
+              <p className="text-xs font-medium text-sidebar-accent-foreground">Free Plan</p>
+              <p className="mt-1 text-xs text-muted-foreground">Upgrade to Pro</p>
+            </div>
+          </>
         )}
       </SidebarFooter>
     </Sidebar>
