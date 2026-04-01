@@ -1,12 +1,24 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
-import { Search, ChevronDown } from "lucide-react";
+import { Search, ChevronDown, User, Settings, CreditCard, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { NotificationDropdown } from "@/components/NotificationDropdown";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const navigate = useNavigate();
+
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full">
@@ -26,13 +38,39 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
             <div className="flex items-center gap-1">
               <ThemeToggle />
               <NotificationDropdown />
-              <Button variant="ghost" className="flex items-center gap-2 px-2">
-                <div className="gradient-primary h-7 w-7 rounded-full flex items-center justify-center">
-                  <span className="text-xs font-semibold text-primary-foreground">JD</span>
-                </div>
-                <span className="text-sm font-medium hidden sm:inline">John Doe</span>
-                <ChevronDown className="h-3 w-3 text-muted-foreground" />
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="flex items-center gap-2 px-2">
+                    <div className="gradient-primary h-7 w-7 rounded-full flex items-center justify-center">
+                      <span className="text-xs font-semibold text-primary-foreground">JD</span>
+                    </div>
+                    <span className="text-sm font-medium hidden sm:inline">John Doe</span>
+                    <ChevronDown className="h-3 w-3 text-muted-foreground" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel>
+                    <div className="flex flex-col">
+                      <span className="text-sm font-medium">John Doe</span>
+                      <span className="text-xs text-muted-foreground">john@example.com</span>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => navigate("/settings")} className="cursor-pointer">
+                    <User className="h-4 w-4 mr-2" /> Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate("/settings")} className="cursor-pointer">
+                    <Settings className="h-4 w-4 mr-2" /> Settings
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate("/subscription")} className="cursor-pointer">
+                    <CreditCard className="h-4 w-4 mr-2" /> Billing
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="cursor-pointer text-destructive focus:text-destructive">
+                    <LogOut className="h-4 w-4 mr-2" /> Log out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </header>
           <main className="flex-1 p-4 md:p-6 overflow-auto">
