@@ -9,10 +9,10 @@ import {
   CreditCard,
   FileText,
   Crown,
-  Search,
   Megaphone,
   UserCheck,
   ExternalLink,
+  Settings,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
