@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Search, ShoppingBag, Heart, Star, Filter, Grid, List } from "lucide-react";
+import { Search, ShoppingBag, Heart, Star, Filter, ChevronLeft, ChevronRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { PublicNavbar } from "@/components/PublicNavbar";
 import {
   Select,
   SelectContent,
@@ -27,9 +26,16 @@ const PRODUCTS = [
   { id: 10, name: "Fitness Tracker Watch", category: "Electronics", price: "$149.99", originalPrice: "$199.99", rating: 4.8, reviews: 2100, image: "⌚", badge: "Sale" },
   { id: 11, name: "Organic Green Tea - 100 Bags", category: "Food", price: "$24.99", originalPrice: null, rating: 4.5, reviews: 567, image: "🍵", badge: null },
   { id: 12, name: "Luxury Bath Towel Set", category: "Home", price: "$64.99", originalPrice: "$84.99", rating: 4.6, reviews: 389, image: "🛁", badge: null },
+  { id: 13, name: "Vitamin C Serum - Premium", category: "Beauty", price: "$45.99", originalPrice: "$59.99", rating: 4.8, reviews: 1023, image: "✨", badge: "Best Seller" },
+  { id: 14, name: "Resistance Bands Set - Pro", category: "Sports", price: "$29.99", originalPrice: null, rating: 4.4, reviews: 756, image: "💪", badge: null },
+  { id: 15, name: "Wireless Charging Pad", category: "Electronics", price: "$39.99", originalPrice: "$49.99", rating: 4.3, reviews: 432, image: "🔋", badge: "Sale" },
+  { id: 16, name: "Gourmet Chocolate Box", category: "Food", price: "$54.99", originalPrice: null, rating: 4.9, reviews: 891, image: "🍫", badge: "Top Rated" },
+  { id: 17, name: "Aromatherapy Diffuser", category: "Home", price: "$49.99", originalPrice: "$69.99", rating: 4.5, reviews: 543, image: "🌿", badge: "New" },
+  { id: 18, name: "Hair Care Bundle - Organic", category: "Beauty", price: "$72.99", originalPrice: "$95.99", rating: 4.6, reviews: 324, image: "💇", badge: null },
 ];
 
 const CATEGORIES = ["All", "Electronics", "Beauty", "Sports", "Food", "Home"];
+const ITEMS_PER_PAGE = 8;
 
 const badgeColors: Record<string, string> = {
   "Best Seller": "bg-success/10 text-success",
@@ -40,10 +46,10 @@ const badgeColors: Record<string, string> = {
 };
 
 export default function ConsumerShopping() {
-  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [favorites, setFavorites] = useState<number[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const toggleFav = (id: number) => setFavorites((prev) => prev.includes(id) ? prev.filter((f) => f !== id) : [...prev, id]);
 
@@ -53,35 +59,12 @@ export default function ConsumerShopping() {
     return matchSearch && matchCat;
   });
 
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+
   return (
     <div className="min-h-screen bg-background">
-      <nav className="sticky top-0 z-50 bg-card/80 backdrop-blur-lg border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-14 sm:h-16">
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" onClick={() => navigate("/")} className="mr-1">
-              <ArrowLeft className="h-4 w-4 mr-1" /> Back
-            </Button>
-            <div className="h-8 w-8 rounded-lg gradient-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">B</span>
-            </div>
-            <span className="text-lg font-bold text-foreground hidden sm:inline">BizOS</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <Button variant="outline" size="sm" className="relative">
-              <Heart className="h-4 w-4 mr-1" /> <span className="hidden sm:inline">Wishlist</span>
-              {favorites.length > 0 && (
-                <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full gradient-primary flex items-center justify-center text-[10px] font-bold text-primary-foreground">
-                  {favorites.length}
-                </span>
-              )}
-            </Button>
-            <Button size="sm" className="gradient-primary text-primary-foreground">
-              <ShoppingBag className="h-4 w-4 mr-1" /> <span className="hidden sm:inline">Cart</span>
-            </Button>
-          </div>
-        </div>
-      </nav>
+      <PublicNavbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-10">
@@ -96,14 +79,13 @@ export default function ConsumerShopping() {
           </p>
         </div>
 
-        {/* Search */}
         <div className="bg-card rounded-2xl shadow-elevated p-4 sm:p-6 mb-8 border border-border">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div className="relative sm:col-span-2">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input placeholder="Search products..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-10" />
+              <Input placeholder="Search products..." value={search} onChange={(e) => { setSearch(e.target.value); setCurrentPage(1); }} className="pl-10" />
             </div>
-            <Select value={category} onValueChange={setCategory}>
+            <Select value={category} onValueChange={(v) => { setCategory(v); setCurrentPage(1); }}>
               <SelectTrigger>
                 <Filter className="h-4 w-4 mr-2 text-muted-foreground" />
                 <SelectValue placeholder="Category" />
@@ -117,12 +99,19 @@ export default function ConsumerShopping() {
           </div>
         </div>
 
-        <p className="text-sm text-muted-foreground mb-6">
-          Showing <span className="font-semibold text-foreground">{filtered.length}</span> products
-        </p>
+        <div className="flex items-center justify-between mb-6">
+          <p className="text-sm text-muted-foreground">
+            Showing <span className="font-semibold text-foreground">{filtered.length}</span> products
+          </p>
+          {favorites.length > 0 && (
+            <Button variant="outline" size="sm">
+              <Heart className="h-4 w-4 mr-1 fill-destructive text-destructive" /> {favorites.length} Wishlist
+            </Button>
+          )}
+        </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
-          {filtered.map((product) => (
+          {paginated.map((product) => (
             <Card key={product.id} className="shadow-card hover:shadow-elevated transition-all duration-300 group relative">
               <button
                 className="absolute top-3 right-3 z-10 h-8 w-8 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center border border-border hover:bg-card transition-colors"
@@ -165,6 +154,22 @@ export default function ConsumerShopping() {
             <ShoppingBag className="h-12 w-12 mx-auto text-muted-foreground/40 mb-4" />
             <h3 className="text-lg font-medium text-foreground mb-1">No products found</h3>
             <p className="text-muted-foreground">Try adjusting your search filters</p>
+          </div>
+        )}
+
+        {totalPages > 1 && (
+          <div className="flex items-center justify-center gap-2 mt-8">
+            <Button variant="outline" size="sm" disabled={currentPage === 1} onClick={() => setCurrentPage((p) => p - 1)}>
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <Button key={page} variant={currentPage === page ? "default" : "outline"} size="sm" className={currentPage === page ? "gradient-primary text-primary-foreground" : ""} onClick={() => setCurrentPage(page)}>
+                {page}
+              </Button>
+            ))}
+            <Button variant="outline" size="sm" disabled={currentPage === totalPages} onClick={() => setCurrentPage((p) => p + 1)}>
+              <ChevronRight className="h-4 w-4" />
+            </Button>
           </div>
         )}
       </div>

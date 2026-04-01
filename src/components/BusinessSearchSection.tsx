@@ -60,6 +60,14 @@ const BUSINESSES: Business[] = [
   { id: 4, name: "Perth Pro Plumbing", category: "Plumbers", location: "Perth", state: "Western Australia", rating: 4.9, reviews: 203, phone: "+61 8 6123 4567", mapQuery: "Perth+Pro+Plumbing+Perth+WA" },
   { id: 5, name: "Adelaide Spark Electricians", category: "Electricians", location: "Adelaide", state: "South Australia", rating: 4.5, reviews: 78, phone: "+61 8 8234 5678", mapQuery: "Adelaide+Electricians+Adelaide+SA" },
   { id: 6, name: "Gold Coast Clean Co", category: "Cleaning Services", location: "Gold Coast", state: "Queensland", rating: 4.4, reviews: 45, phone: "+61 7 5567 8901", mapQuery: "Gold+Coast+Cleaning+Services+Gold+Coast+QLD" },
+  { id: 7, name: "Canberra Elite Builders", category: "Builders", location: "Canberra", state: "Australian Capital Territory", rating: 4.8, reviews: 167, phone: "+61 2 6234 5678", mapQuery: "Canberra+Elite+Builders+Canberra+ACT" },
+  { id: 8, name: "Hobart Green Landscaping", category: "Landscapers", location: "Hobart", state: "Tasmania", rating: 4.6, reviews: 92, phone: "+61 3 6234 5678", mapQuery: "Hobart+Green+Landscaping+Hobart+TAS" },
+  { id: 9, name: "Darwin IT Solutions", category: "IT Services", location: "Darwin", state: "Northern Territory", rating: 4.7, reviews: 63, phone: "+61 8 8912 3456", mapQuery: "Darwin+IT+Solutions+Darwin+NT" },
+  { id: 10, name: "Newcastle Tax Accountants", category: "Accountants", location: "Newcastle", state: "New South Wales", rating: 4.9, reviews: 215, phone: "+61 2 4923 4567", mapQuery: "Newcastle+Tax+Accountants+Newcastle+NSW" },
+  { id: 11, name: "Parramatta Plumbing Experts", category: "Plumbers", location: "Parramatta", state: "New South Wales", rating: 4.5, reviews: 87, phone: "+61 2 9823 4567", mapQuery: "Parramatta+Plumbing+Experts+Parramatta+NSW" },
+  { id: 12, name: "Melbourne Deep Clean Services", category: "Cleaning Services", location: "Melbourne", state: "Victoria", rating: 4.3, reviews: 134, phone: "+61 3 9234 5678", mapQuery: "Melbourne+Deep+Clean+Services+Melbourne+VIC" },
+  { id: 13, name: "Sydney Sparks Electrical", category: "Electricians", location: "Sydney", state: "New South Wales", rating: 4.7, reviews: 98, phone: "+61 2 9345 6789", mapQuery: "Sydney+Sparks+Electrical+Sydney+NSW" },
+  { id: 14, name: "Brisbane Garden Masters", category: "Landscapers", location: "Brisbane", state: "Queensland", rating: 4.8, reviews: 76, phone: "+61 7 3567 8901", mapQuery: "Brisbane+Garden+Masters+Brisbane+QLD" },
 ];
 
 const ITEMS_PER_PAGE = 6;
@@ -158,7 +166,6 @@ const BusinessSearchSection = () => {
   const totalPages = Math.ceil(filteredBusinesses.length / ITEMS_PER_PAGE);
   const paginatedBusinesses = filteredBusinesses.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
-  // Reset page when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [keyword, organization, location]);
@@ -196,7 +203,6 @@ const BusinessSearchSection = () => {
           </p>
         </div>
 
-        {/* Search Bar */}
         <div className="bg-card rounded-2xl shadow-elevated p-4 sm:p-6 mb-8 sm:mb-10 border border-border">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             <div className="relative">
@@ -265,7 +271,6 @@ const BusinessSearchSection = () => {
           </div>
         )}
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex items-center justify-center gap-2 mt-8">
             <Button

@@ -49,6 +49,7 @@ const managementNav = [
   { title: "Leads", url: "/leads", icon: UserCheck },
   { title: "Payments", url: "/payments", icon: CreditCard },
   { title: "Subscription", url: "/subscription", icon: Crown },
+  { title: "Settings", url: "/settings", icon: Search },
 ];
 
 export function AppSidebar() {

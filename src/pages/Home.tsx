@@ -2,37 +2,14 @@ import { ArrowRight, Globe, ShoppingBag, Users, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import BusinessSearchSection from "@/components/BusinessSearchSection";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { PublicNavbar } from "@/components/PublicNavbar";
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-card/80 backdrop-blur-lg border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-14 sm:h-16">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg gradient-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">B</span>
-            </div>
-            <span className="text-lg sm:text-xl font-bold text-foreground">BizOS</span>
-          </div>
-          <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
-            <a href="#search" className="hover:text-foreground transition-colors">Find Business</a>
-            <a href="#features" className="hover:text-foreground transition-colors">Features</a>
-            <button onClick={() => navigate("/wholesale")} className="hover:text-foreground transition-colors">Wholesale</button>
-            <button onClick={() => navigate("/consumer-shopping")} className="hover:text-foreground transition-colors">Shopping</button>
-            <button onClick={() => navigate("/frontend-leads")} className="hover:text-foreground transition-colors">Leads</button>
-          </div>
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <Button size="sm" className="gradient-primary text-primary-foreground" onClick={() => navigate("/dashboard")}>
-              Dashboard <ArrowRight className="h-4 w-4 ml-1" />
-            </Button>
-          </div>
-        </div>
-      </nav>
+      <PublicNavbar />
 
       {/* Hero */}
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 text-center">

@@ -49,6 +49,7 @@ const App = () => (
           <Route path="/frontend-leads" element={<FrontendLeads />} />
           <Route path="/wholesale" element={<Wholesale />} />
           <Route path="/consumer-shopping" element={<ConsumerShopping />} />
+          <Route path="/settings" element={<Settings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
