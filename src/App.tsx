@@ -17,6 +17,9 @@ import Payments from "./pages/Payments";
 import Subscription from "./pages/Subscription";
 import Leads from "./pages/Leads";
 import BusinessDetail from "./pages/BusinessDetail";
+import FrontendLeads from "./pages/FrontendLeads";
+import Wholesale from "./pages/Wholesale";
+import ConsumerShopping from "./pages/ConsumerShopping";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
