@@ -1,8 +1,10 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
-import { Bell, Search, ChevronDown } from "lucide-react";
+import { Search, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { NotificationDropdown } from "@/components/NotificationDropdown";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -21,11 +23,9 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                 />
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Button variant="ghost" size="icon" className="relative">
-                <Bell className="h-4 w-4" />
-                <span className="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full gradient-primary" />
-              </Button>
+            <div className="flex items-center gap-1">
+              <ThemeToggle />
+              <NotificationDropdown />
               <Button variant="ghost" className="flex items-center gap-2 px-2">
                 <div className="gradient-primary h-7 w-7 rounded-full flex items-center justify-center">
                   <span className="text-xs font-semibold text-primary-foreground">JD</span>
