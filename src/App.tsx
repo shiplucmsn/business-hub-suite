@@ -20,6 +20,7 @@ import BusinessDetail from "./pages/BusinessDetail";
 import FrontendLeads from "./pages/FrontendLeads";
 import Wholesale from "./pages/Wholesale";
 import ConsumerShopping from "./pages/ConsumerShopping";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
