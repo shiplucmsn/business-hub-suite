@@ -20,6 +20,7 @@ import BusinessDetail from "./pages/BusinessDetail";
 import FrontendLeads from "./pages/FrontendLeads";
 import Wholesale from "./pages/Wholesale";
 import ConsumerShopping from "./pages/ConsumerShopping";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -48,6 +49,7 @@ const App = () => (
           <Route path="/frontend-leads" element={<FrontendLeads />} />
           <Route path="/wholesale" element={<Wholesale />} />
           <Route path="/consumer-shopping" element={<ConsumerShopping />} />
+          <Route path="/settings" element={<Settings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -9,10 +9,10 @@ import {
   CreditCard,
   FileText,
   Crown,
-  Search,
   Megaphone,
   UserCheck,
   ExternalLink,
+  Settings,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
@@ -49,6 +49,7 @@ const managementNav = [
   { title: "Leads", url: "/leads", icon: UserCheck },
   { title: "Payments", url: "/payments", icon: CreditCard },
   { title: "Subscription", url: "/subscription", icon: Crown },
+  { title: "Settings", url: "/settings", icon: Settings },
 ];
 
 export function AppSidebar() {
@@ -88,7 +89,7 @@ export function AppSidebar() {
       <SidebarHeader className="p-4">
         <div className="flex items-center gap-2">
           <div className="gradient-primary flex h-8 w-8 shrink-0 items-center justify-center rounded-lg">
-            <Search className="h-4 w-4 text-primary-foreground" />
+            <LayoutDashboard className="h-4 w-4 text-primary-foreground" />
           </div>
           {!collapsed && (
             <span className="text-lg font-bold tracking-tight text-sidebar-foreground">
