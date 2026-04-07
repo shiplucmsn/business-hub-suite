@@ -21,6 +21,10 @@ import FrontendLeads from "./pages/FrontendLeads";
 import Wholesale from "./pages/Wholesale";
 import ConsumerShopping from "./pages/ConsumerShopping";
 import Settings from "./pages/Settings";
+import Features from "./pages/Features";
+import Pricing from "./pages/Pricing";
+import CompanyDirectory from "./pages/CompanyDirectory";
+import CompanyProfile from "./pages/CompanyProfile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +37,10 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/features" element={<Features />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/directory" element={<CompanyDirectory />} />
+          <Route path="/company-profile/:id" element={<CompanyProfile />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/website-builder" element={<WebsiteBuilder />} />
           <Route path="/domains" element={<Domains />} />
