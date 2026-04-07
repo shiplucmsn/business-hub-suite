@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Search, MapPin, Building2, Phone, ChevronLeft, ChevronRight } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Search, MapPin, Building2, Phone, ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -68,17 +67,26 @@ const BUSINESSES: Business[] = [
   { id: 12, name: "Melbourne Deep Clean Services", category: "Cleaning Services", location: "Melbourne", state: "Victoria", rating: 4.3, reviews: 134, phone: "+61 3 9234 5678", mapQuery: "Melbourne+Deep+Clean+Services+Melbourne+VIC" },
   { id: 13, name: "Sydney Sparks Electrical", category: "Electricians", location: "Sydney", state: "New South Wales", rating: 4.7, reviews: 98, phone: "+61 2 9345 6789", mapQuery: "Sydney+Sparks+Electrical+Sydney+NSW" },
   { id: 14, name: "Brisbane Garden Masters", category: "Landscapers", location: "Brisbane", state: "Queensland", rating: 4.8, reviews: 76, phone: "+61 7 3567 8901", mapQuery: "Brisbane+Garden+Masters+Brisbane+QLD" },
+  { id: 15, name: "Perth Coastal Builders", category: "Builders", location: "Perth", state: "Western Australia", rating: 4.6, reviews: 112, phone: "+61 8 6234 5678", mapQuery: "Perth+Coastal+Builders+Perth+WA" },
+  { id: 16, name: "Adelaide IT Consulting", category: "IT Services", location: "Adelaide", state: "South Australia", rating: 4.4, reviews: 54, phone: "+61 8 8345 6789", mapQuery: "Adelaide+IT+Consulting+Adelaide+SA" },
+  { id: 17, name: "Gold Coast Premier Removals", category: "Removalists", location: "Gold Coast", state: "Queensland", rating: 4.9, reviews: 178, phone: "+61 7 5678 9012", mapQuery: "Gold+Coast+Premier+Removals+Gold+Coast+QLD" },
+  { id: 18, name: "Canberra Bright Electricians", category: "Electricians", location: "Canberra", state: "Australian Capital Territory", rating: 4.5, reviews: 67, phone: "+61 2 6345 6789", mapQuery: "Canberra+Bright+Electricians+Canberra+ACT" },
+  { id: 19, name: "Sydney Prime Accountants", category: "Accountants", location: "Sydney", state: "New South Wales", rating: 4.8, reviews: 198, phone: "+61 2 9456 7890", mapQuery: "Sydney+Prime+Accountants+Sydney+NSW" },
+  { id: 20, name: "Melbourne Landscape Design", category: "Landscapers", location: "Melbourne", state: "Victoria", rating: 4.7, reviews: 143, phone: "+61 3 9345 6789", mapQuery: "Melbourne+Landscape+Design+Melbourne+VIC" },
 ];
 
 const ITEMS_PER_PAGE = 6;
 
-const BusinessCard = ({ business }: { business: Business }) => {
+const BusinessCard = ({ business, index }: { business: Business; index: number }) => {
   const [showPhone, setShowPhone] = useState(false);
   const navigate = useNavigate();
 
   return (
-    <Card className="overflow-hidden shadow-card hover:shadow-elevated transition-all duration-300 group">
-      <div className="h-36 sm:h-44 w-full bg-muted relative overflow-hidden">
+    <Card
+      className="overflow-hidden border border-border/60 bg-card hover:shadow-elevated transition-all duration-500 group"
+      style={{ animationDelay: `${index * 80}ms` }}
+    >
+      <div className="h-40 w-full bg-muted relative overflow-hidden">
         <iframe
           title={`Map for ${business.name}`}
           width="100%"
@@ -89,45 +97,41 @@ const BusinessCard = ({ business }: { business: Business }) => {
           src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${business.mapQuery}`}
           allowFullScreen
         />
-      </div>
-
-      <CardContent className="p-4 sm:p-5 space-y-2.5">
-        <Badge variant="secondary" className="text-xs font-medium">
+        <Badge
+          variant="secondary"
+          className="absolute top-3 left-3 text-xs font-medium bg-card/90 backdrop-blur-sm border-0 shadow-sm"
+        >
           {business.category}
         </Badge>
+      </div>
 
-        <h3 className="text-base sm:text-lg font-semibold text-foreground leading-tight group-hover:text-primary transition-colors">
+      <CardContent className="p-5 space-y-3">
+        <h3 className="text-base font-semibold text-foreground leading-snug group-hover:text-primary transition-colors line-clamp-2">
           {business.name}
         </h3>
 
         <div className="flex items-center gap-1.5 text-muted-foreground text-sm">
-          <MapPin className="h-3.5 w-3.5 shrink-0" />
-          <span>{business.state}</span>
+          <MapPin className="h-3.5 w-3.5 shrink-0 text-primary/60" />
+          <span>{business.location}, {business.state}</span>
         </div>
-        <p className="text-sm text-foreground/80">{business.name}</p>
 
-        <div className="flex items-center gap-1.5">
-          <div className="flex">
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-0.5">
             {[...Array(5)].map((_, i) => (
-              <svg
+              <Star
                 key={i}
-                className={`h-4 w-4 ${i < Math.floor(business.rating) ? "text-warning" : "text-muted"}`}
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
+                className={`h-3.5 w-3.5 ${i < Math.floor(business.rating) ? "text-warning fill-warning" : "text-muted"}`}
+              />
             ))}
           </div>
-          <span className="text-sm text-muted-foreground">
-            {business.rating} ({business.reviews} reviews)
-          </span>
+          <span className="text-sm font-medium text-foreground">{business.rating}</span>
+          <span className="text-xs text-muted-foreground">({business.reviews})</span>
         </div>
 
-        <div className="flex gap-2 pt-2">
+        <div className="flex gap-2 pt-1">
           <Button
             size="sm"
-            className="flex-1 gradient-primary text-primary-foreground"
+            className="flex-1 gradient-primary text-primary-foreground hover:opacity-90 transition-opacity"
             onClick={() => navigate(`/business/${business.id}`)}
           >
             Details
@@ -135,11 +139,11 @@ const BusinessCard = ({ business }: { business: Business }) => {
           <Button
             size="sm"
             variant={showPhone ? "default" : "outline"}
-            className="flex-1"
+            className="flex-1 text-xs"
             onClick={() => setShowPhone(!showPhone)}
           >
             <Phone className="h-3.5 w-3.5 mr-1" />
-            {showPhone ? business.phone : "Show Phone"}
+            {showPhone ? business.phone : "Phone"}
           </Button>
         </div>
       </CardContent>
@@ -166,9 +170,7 @@ const BusinessSearchSection = () => {
   const totalPages = Math.ceil(filteredBusinesses.length / ITEMS_PER_PAGE);
   const paginatedBusinesses = filteredBusinesses.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [keyword, organization, location]);
+  useEffect(() => { setCurrentPage(1); }, [keyword, organization, location]);
 
   useEffect(() => {
     if (location.length > 0) {
@@ -192,27 +194,40 @@ const BusinessSearchSection = () => {
   }, []);
 
   return (
-    <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8 sm:mb-10">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3">
+    <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1200px] mx-auto">
+        {/* Heading */}
+        <div className="text-center mb-10 sm:mb-14 animate-[fadeInUp_0.6s_ease-out]">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 tracking-tight">
             Find a <span className="gradient-text">Business</span>
           </h2>
-          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
             Search thousands of trusted businesses near you
           </p>
         </div>
 
-        <div className="bg-card rounded-2xl shadow-elevated p-4 sm:p-6 mb-8 sm:mb-10 border border-border">
+        {/* Search Box */}
+        <div
+          className="bg-card rounded-2xl shadow-elevated p-4 sm:p-6 mb-10 sm:mb-14 border border-border/50 animate-[fadeInUp_0.6s_ease-out_0.15s_both]"
+        >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {/* Keyword */}
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input placeholder="Search keyword..." value={keyword} onChange={(e) => setKeyword(e.target.value)} className="pl-10" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+              <input
+                type="text"
+                placeholder="Search keyword..."
+                aria-label="Search keyword"
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+                className="flex h-11 w-full rounded-xl border border-input bg-secondary/50 pl-10 pr-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
+              />
             </div>
 
+            {/* Organization */}
             <Select value={organization} onValueChange={setOrganization}>
-              <SelectTrigger>
-                <Building2 className="h-4 w-4 mr-2 text-muted-foreground" />
+              <SelectTrigger className="h-11 rounded-xl border-input bg-secondary/50 focus:ring-2 focus:ring-ring">
+                <Building2 className="h-4 w-4 mr-2 text-muted-foreground shrink-0" />
                 <SelectValue placeholder="Organization" />
               </SelectTrigger>
               <SelectContent>
@@ -222,21 +237,24 @@ const BusinessSearchSection = () => {
               </SelectContent>
             </Select>
 
+            {/* Location */}
             <div className="relative" ref={locationRef}>
-              <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground z-10" />
-              <Input
+              <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none z-10" />
+              <input
+                type="text"
                 placeholder="Location..."
+                aria-label="Location"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="pl-10"
                 onFocus={() => { if (filteredLocations.length > 0) setLocationOpen(true); }}
+                className="flex h-11 w-full rounded-xl border border-input bg-secondary/50 pl-10 pr-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
               />
               {locationOpen && filteredLocations.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-1 bg-popover border border-border rounded-lg shadow-elevated z-50 max-h-48 overflow-y-auto">
+                <div className="absolute top-full left-0 right-0 mt-1.5 bg-popover border border-border rounded-xl shadow-elevated z-50 max-h-48 overflow-y-auto animate-[fadeInUp_0.2s_ease-out]">
                   {filteredLocations.map((loc) => (
                     <button
                       key={loc}
-                      className="w-full text-left px-4 py-2.5 text-sm hover:bg-accent/10 text-foreground transition-colors"
+                      className="w-full text-left px-4 py-2.5 text-sm hover:bg-accent/10 text-foreground transition-colors first:rounded-t-xl last:rounded-b-xl"
                       onClick={() => { setLocation(loc); setLocationOpen(false); }}
                     >
                       <MapPin className="h-3.5 w-3.5 inline mr-2 text-muted-foreground" />
@@ -247,35 +265,45 @@ const BusinessSearchSection = () => {
               )}
             </div>
 
-            <Button className="gradient-primary text-primary-foreground h-10">
+            {/* Search Button */}
+            <Button className="h-11 rounded-xl gradient-primary text-primary-foreground hover:opacity-90 transition-opacity font-medium">
               <Search className="h-4 w-4 mr-2" /> Search
             </Button>
           </div>
         </div>
 
-        <p className="text-sm text-muted-foreground mb-6">
+        {/* Results count */}
+        <p className="text-sm text-muted-foreground mb-6 animate-[fadeInUp_0.6s_ease-out_0.3s_both]">
           Showing <span className="font-semibold text-foreground">{filteredBusinesses.length}</span> businesses
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {paginatedBusinesses.map((business) => (
-            <BusinessCard key={business.id} business={business} />
+        {/* Business Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+          {paginatedBusinesses.map((business, i) => (
+            <div key={business.id} className="animate-[fadeInUp_0.5s_ease-out_both]" style={{ animationDelay: `${i * 80 + 350}ms` }}>
+              <BusinessCard business={business} index={i} />
+            </div>
           ))}
         </div>
 
+        {/* Empty state */}
         {filteredBusinesses.length === 0 && (
-          <div className="text-center py-16">
-            <Building2 className="h-12 w-12 mx-auto text-muted-foreground/40 mb-4" />
-            <h3 className="text-lg font-medium text-foreground mb-1">No businesses found</h3>
-            <p className="text-muted-foreground">Try adjusting your search filters</p>
+          <div className="text-center py-20">
+            <div className="w-16 h-16 rounded-2xl bg-muted flex items-center justify-center mx-auto mb-4">
+              <Building2 className="h-8 w-8 text-muted-foreground/50" />
+            </div>
+            <h3 className="text-lg font-semibold text-foreground mb-1">No businesses found</h3>
+            <p className="text-muted-foreground text-sm">Try adjusting your search filters</p>
           </div>
         )}
 
+        {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-2 mt-8">
+          <div className="flex items-center justify-center gap-1.5 mt-10 animate-[fadeInUp_0.5s_ease-out_0.5s_both]">
             <Button
               variant="outline"
-              size="sm"
+              size="icon"
+              className="h-9 w-9 rounded-lg"
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => p - 1)}
             >
@@ -284,9 +312,9 @@ const BusinessSearchSection = () => {
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <Button
                 key={page}
-                variant={currentPage === page ? "default" : "outline"}
+                variant={currentPage === page ? "default" : "ghost"}
                 size="sm"
-                className={currentPage === page ? "gradient-primary text-primary-foreground" : ""}
+                className={`h-9 w-9 rounded-lg p-0 ${currentPage === page ? "gradient-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
                 onClick={() => setCurrentPage(page)}
               >
                 {page}
@@ -294,7 +322,8 @@ const BusinessSearchSection = () => {
             ))}
             <Button
               variant="outline"
-              size="sm"
+              size="icon"
+              className="h-9 w-9 rounded-lg"
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => p + 1)}
             >
