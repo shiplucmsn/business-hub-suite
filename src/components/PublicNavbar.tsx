@@ -10,6 +10,9 @@ const NAV_LINKS = [
   { label: "Features", path: "/features" },
   { label: "Pricing", path: "/pricing" },
   { label: "Directory", path: "/directory" },
+  { label: "Services", path: "/services-marketplace" },
+  { label: "Products", path: "/products-marketplace" },
+  { label: "Jobs", path: "/jobs" },
   { label: "Wholesale", path: "/wholesale" },
   { label: "Shopping", path: "/consumer-shopping" },
   { label: "Leads", path: "/frontend-leads" },
@@ -25,19 +28,18 @@ export function PublicNavbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-14 sm:h-16">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
           <div className="h-8 w-8 rounded-lg gradient-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-sm">B</span>
+            <span className="text-primary-foreground font-bold text-sm">T</span>
           </div>
-          <span className="text-lg sm:text-xl font-bold text-foreground">BizOS</span>
+          <span className="text-lg sm:text-xl font-bold text-foreground">TradingHub</span>
         </div>
 
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden lg:flex items-center gap-0.5">
           {NAV_LINKS.map((link) => (
             <button
               key={link.path}
               onClick={() => navigate(link.path)}
               className={cn(
-                "px-4 py-2 rounded-lg text-sm font-medium transition-colors",
+                "px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                 location.pathname === link.path
                   ? "bg-primary/10 text-primary"
                   : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
@@ -50,18 +52,20 @@ export function PublicNavbar() {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
+          <Button size="sm" variant="outline" className="hidden sm:flex" onClick={() => navigate("/login")}>
+            Sign in
+          </Button>
           <Button size="sm" className="gradient-primary text-primary-foreground hidden sm:flex" onClick={() => navigate("/dashboard")}>
             Dashboard <ArrowRight className="h-4 w-4 ml-1" />
           </Button>
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
+          <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
         </div>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-border bg-card/95 backdrop-blur-lg">
+        <div className="lg:hidden border-t border-border bg-card/95 backdrop-blur-lg max-h-[70vh] overflow-y-auto">
           <div className="px-4 py-3 space-y-1">
             {NAV_LINKS.map((link) => (
               <button
@@ -77,13 +81,10 @@ export function PublicNavbar() {
                 {link.label}
               </button>
             ))}
-            <Button
-              size="sm"
-              className="w-full gradient-primary text-primary-foreground mt-2"
-              onClick={() => { navigate("/dashboard"); setMobileOpen(false); }}
-            >
-              Dashboard <ArrowRight className="h-4 w-4 ml-1" />
-            </Button>
+            <div className="flex gap-2 mt-2">
+              <Button size="sm" variant="outline" className="flex-1" onClick={() => { navigate("/login"); setMobileOpen(false); }}>Sign in</Button>
+              <Button size="sm" className="flex-1 gradient-primary text-primary-foreground" onClick={() => { navigate("/dashboard"); setMobileOpen(false); }}>Dashboard</Button>
+            </div>
           </div>
         </div>
       )}
