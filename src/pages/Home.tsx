@@ -44,7 +44,7 @@ const MARKETPLACE_PREVIEW = [
 ];
 
 const TESTIMONIALS = [
-  { name: "Sarah Chen", role: "CEO, Bloom Digital", text: "BizOS transformed how we manage our agency. The AI tools alone saved us 20 hours per week.", avatar: "SC" },
+  { name: "Sarah Chen", role: "CEO, Bloom Digital", text: "TradingHub transformed how we manage our agency. The AI tools alone saved us 20 hours per week.", avatar: "SC" },
   { name: "James Murray", role: "Founder, Murray Plumbing", text: "From zero online presence to fully booked in 3 months. The website builder and CRM are game-changers.", avatar: "JM" },
   { name: "Priya Patel", role: "Freelance Designer", text: "I manage all my clients, invoices, and portfolio in one place. It's the only tool I need.", avatar: "PP" },
 ];
@@ -156,7 +156,7 @@ const Home = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Built for <span className="gradient-text">Every Business</span></h2>
-            <p className="text-muted-foreground text-lg max-w-xl mx-auto">Whether you're a solo freelancer or a growing agency, BizOS scales with you.</p>
+            <p className="text-muted-foreground text-lg max-w-xl mx-auto">Whether you're a solo freelancer or a growing agency, TradingHub scales with you.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {USE_CASES.map((uc) => (
@@ -213,7 +213,7 @@ const Home = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Loved by <span className="gradient-text">Thousands</span></h2>
-            <p className="text-muted-foreground text-lg max-w-xl mx-auto">See what our customers have to say about BizOS.</p>
+            <p className="text-muted-foreground text-lg max-w-xl mx-auto">See what our customers have to say about TradingHub.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {TESTIMONIALS.map((t) => (
@@ -277,7 +277,7 @@ const Home = () => {
       <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Ready to Transform Your <span className="gradient-text">Business</span>?</h2>
-          <p className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto">Join 12,000+ businesses already using BizOS. Start free — no credit card required.</p>
+          <p className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto">Join 12,000+ businesses already using TradingHub. Start free — no credit card required.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-3">
             <Button size="lg" className="gradient-primary text-primary-foreground h-12 px-8 text-base" onClick={() => navigate("/dashboard")}>
               Start Free Trial <ArrowRight className="h-4 w-4 ml-2" />
@@ -300,9 +300,9 @@ const Home = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="h-8 w-8 rounded-lg gradient-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">B</span>
+                <span className="text-primary-foreground font-bold text-sm">T</span>
               </div>
-              <span className="text-lg font-bold text-foreground">BizOS</span>
+              <span className="text-lg font-bold text-foreground">TradingHub</span>
             </div>
             <p className="text-sm text-muted-foreground">The all-in-one platform for modern business.</p>
           </div>
@@ -322,7 +322,7 @@ const Home = () => {
           ))}
         </div>
         <div className="border-t border-border pt-6 text-center text-sm text-muted-foreground">
-          © 2026 BizOS. All rights reserved.
+          © 2026 TradingHub. All rights reserved.
         </div>
       </footer>
     </div>

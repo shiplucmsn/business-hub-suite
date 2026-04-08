@@ -5,11 +5,11 @@ import { MapPin, Clock, Briefcase, Plus, Building2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const jobs = [
-  { title: "Senior React Developer", company: "BizOS", location: "Remote", type: "Full-time", salary: "$120k-$150k", posted: "2 days ago", applicants: 24 },
-  { title: "UI/UX Designer", company: "BizOS", location: "San Francisco", type: "Full-time", salary: "$90k-$120k", posted: "5 days ago", applicants: 38 },
-  { title: "Marketing Manager", company: "BizOS", location: "Remote", type: "Contract", salary: "$80k-$100k", posted: "1 week ago", applicants: 15 },
-  { title: "DevOps Engineer", company: "BizOS", location: "New York", type: "Full-time", salary: "$130k-$160k", posted: "3 days ago", applicants: 12 },
-  { title: "Content Strategist", company: "BizOS", location: "Remote", type: "Part-time", salary: "$50k-$70k", posted: "1 day ago", applicants: 8 },
+  { title: "Senior React Developer", company: "TradingHub", location: "Remote", type: "Full-time", salary: "$120k-$150k", posted: "2 days ago", applicants: 24 },
+  { title: "UI/UX Designer", company: "TradingHub", location: "San Francisco", type: "Full-time", salary: "$90k-$120k", posted: "5 days ago", applicants: 38 },
+  { title: "Marketing Manager", company: "TradingHub", location: "Remote", type: "Contract", salary: "$80k-$100k", posted: "1 week ago", applicants: 15 },
+  { title: "DevOps Engineer", company: "TradingHub", location: "New York", type: "Full-time", salary: "$130k-$160k", posted: "3 days ago", applicants: 12 },
+  { title: "Content Strategist", company: "TradingHub", location: "Remote", type: "Part-time", salary: "$50k-$70k", posted: "1 day ago", applicants: 8 },
 ];
 
 const typeColors: Record<string, string> = {
