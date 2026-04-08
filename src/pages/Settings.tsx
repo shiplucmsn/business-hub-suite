@@ -57,7 +57,7 @@ export default function Settings() {
                 </div>
                 <div className="space-y-2">
                   <Label>Company</Label>
-                  <Input defaultValue="BizOS Inc." />
+                  <Input defaultValue="TradingHub Inc." />
                 </div>
                 <div className="space-y-2">
                   <Label>Bio</Label>

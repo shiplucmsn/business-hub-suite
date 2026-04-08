@@ -288,7 +288,7 @@ const CompanyProfile = () => {
       </section>
 
       <footer className="border-t border-border py-8 px-4 text-center text-sm text-muted-foreground">
-        © 2026 BizOS. All rights reserved.
+        © 2026 TradingHub. All rights reserved.
       </footer>
     </div>
   );

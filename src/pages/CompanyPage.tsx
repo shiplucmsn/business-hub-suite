@@ -27,7 +27,7 @@ export default function CompanyPage() {
             <div className="ml-0 pt-14 md:ml-32 md:pt-0">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                  <h2 className="text-xl font-bold">BizOS Technologies</h2>
+                  <h2 className="text-xl font-bold">TradingHub Technologies</h2>
                   <p className="text-sm text-muted-foreground flex items-center gap-1 mt-1">
                     <MapPin className="h-3 w-3" /> San Francisco, CA
                   </p>
@@ -51,7 +51,7 @@ export default function CompanyPage() {
             <CardContent className="p-5">
               <h3 className="font-semibold mb-2">About</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                BizOS Technologies is a leading SaaS company providing all-in-one business management solutions. We help businesses streamline their operations, from website building to payment processing.
+                TradingHub Technologies is a leading SaaS company providing all-in-one business management solutions. We help businesses streamline their operations, from website building to payment processing.
               </p>
               <div className="flex flex-wrap gap-2 mt-4">
                 {["SaaS", "Web Development", "E-commerce", "Digital Services"].map((t) => (

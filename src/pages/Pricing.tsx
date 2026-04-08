@@ -14,7 +14,7 @@ const PLANS = [
     desc: "Perfect for getting started",
     features: [
       "1 Website", "Basic CRM (100 contacts)", "5 Products", "3 Services",
-      "Community Support", "Basic Analytics", "BizOS Branding",
+      "Community Support", "Basic Analytics", "TradingHub Branding",
     ],
     cta: "Get Started",
     popular: false,
@@ -219,7 +219,7 @@ const Pricing = () => {
       </section>
 
       <footer className="border-t border-border py-8 px-4 text-center text-sm text-muted-foreground">
-        © 2026 BizOS. All rights reserved.
+        © 2026 TradingHub. All rights reserved.
       </footer>
     </div>
   );
